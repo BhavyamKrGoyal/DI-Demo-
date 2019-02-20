@@ -8,10 +8,11 @@ namespace Inputs
 {
     public class InputComponent
     {
-        ControllerPlayer controller;
+        IControllerPlayer controller;
 
-        public InputComponent(ControllerPlayer controller)
+        public InputComponent(IControllerPlayer controller)
         {
+            Debug.Log("setting inputcomponent" + controller.GetHashCode());
             this.controller = controller;
             //InputManager.Instance.RegisterInputComponent(this,controller.GetControls());
         }

@@ -1,8 +1,8 @@
 namespace Scripts
 {
     public enum Controls
-{
-    WASD = 1,
-    IJKL = 2
-}
+    {
+        WASD = 1,
+        IJKL = 2
+    }
 }

@@ -5,17 +5,18 @@ using UnityEngine;
 
 namespace Player
 {
-    public class ControllerPlayer
+    public class ControllerPlayer : IControllerPlayer
     {
         ViewPlayer view;
         ModelPlayer model;
         InputComponent inputComponent;
-        public ControllerPlayer(ViewPlayer player, Vector3 spawnPoint,ModelPlayer model)
+        public ControllerPlayer(ViewPlayer player,ModelPlayer model)
         {
+            this.model = model;
+            Debug.Log("Player Constructor");
             inputComponent = new InputComponent(this);
-            this.view = GameObject.Instantiate(player.gameObject, spawnPoint, Quaternion.identity, null).GetComponent<ViewPlayer>();
+            this.view = GameObject.Instantiate(player.gameObject, model.position, Quaternion.identity, null).GetComponent<ViewPlayer>();
             view.SetController(this);
-            this.model =model;
         }
         public void Move(float horizontal, float vertical)
         {
@@ -29,7 +30,6 @@ namespace Player
         {
             return inputComponent;
         }
-
     }
 
 }

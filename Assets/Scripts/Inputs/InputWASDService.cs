@@ -3,26 +3,28 @@ using System;
 using Player;
 using Scripts;
 using UnityEngine;
+using Zenject;
 
 namespace Inputs
 {
-    public class InputWASDService : MonoBehaviour
+    public class InputWASDService : ITickable
     {
-        InputData inputData;
+        IInputService inputService;
         Controls controls = Controls.WASD;
-        // public event Action<ControllerPlayer, InputComponent, Controls> OnPlayerDeath;
-        private void Start()
+        InputData inputData;
+        public InputWASDService(IInputService inputService)
         {
-            InputService.Instance.AddPlayerInputData(controls);
-
+            this.inputService = inputService;
+            inputService.AddPlayerInputData(controls);
         }
-        public void Update()
+
+        // public event Action<ControllerPlayer, InputComponent, Controls> OnPlayerDeath;
+        public void Tick()
         {
             inputData = new InputData();
             inputData.forward = Input.GetAxis("Horizontal");
             inputData.direction = Input.GetAxis("Vertical");
-            //Debug.Log("getting Input using IJKL");
-            InputService.Instance.playerInput[controls]=inputData;
-        } 
+            inputService.SetInput(controls, inputData);
+        }
     }
 }
