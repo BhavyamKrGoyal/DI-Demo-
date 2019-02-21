@@ -11,9 +11,10 @@ namespace Player
     {
         IInputService inputService;
         public List<IControllerPlayer> players = new List<IControllerPlayer>();
-        public ServicePlayer(IInputService inputService, IControllerPlayer controllerPlayer)
+        public ServicePlayer(IInputService inputService, ScriptablePlayer player)
         {
             players = new List<IControllerPlayer>();
+            ControllerPlayer controllerPlayer=new ControllerPlayer(player.playerView);
             this.inputService = inputService;
             Debug.Log("playerService Constructer");
             inputService.RegisterInputComponent(controllerPlayer.GetInputComponent(), Controls.WASD);

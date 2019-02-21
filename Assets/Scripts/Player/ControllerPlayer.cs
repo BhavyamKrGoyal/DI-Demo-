@@ -1,5 +1,4 @@
 
-
 using Inputs;
 using UnityEngine;
 
@@ -10,12 +9,11 @@ namespace Player
         ViewPlayer view;
         ModelPlayer model;
         InputComponent inputComponent;
-        public ControllerPlayer(ViewPlayer player,ModelPlayer model)
+        public ControllerPlayer(ViewPlayer player)
         {
-            this.model = model;
-            Debug.Log("Player Constructor");
+            model = new ModelPlayer();
             inputComponent = new InputComponent(this);
-            this.view = GameObject.Instantiate(player.gameObject, model.position, Quaternion.identity, null).GetComponent<ViewPlayer>();
+            view = GameObject.Instantiate(player.gameObject, model.position, Quaternion.identity, null).GetComponent<ViewPlayer>();
             view.SetController(this);
         }
         public void Move(float horizontal, float vertical)
